@@ -13,6 +13,21 @@ function generatePassword() {
   var specialInput = window.confirm("Would you like your password to include special characters?");
   var passwordArray = [];
 
+  if (undercaseInput) {
+    for (i=0; i<letters.length; i++) {
+      passwordArray[i] = letters[i].toLowerCase();
+    };
+  }
+  /*
+  if (uppercaseInput && passwordArray.length > 0) {
+    passwordArray = passwordArray.join(letters)
+  } else if (uppercaseInput) {
+    passwordArray = letters;
+  }
+*/
+  return passwordArray;
+}
+
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
