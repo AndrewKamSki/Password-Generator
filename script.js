@@ -6,52 +6,54 @@ var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","R","
 var nums = [0,1,2,3,4,5,6,7,8,9];
 var specialChars = ["!",'"',"#","$","%","&","'","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","]","\"","^","_","`","{","|","}","~"];
 
+// Function to generate password
 function generatePassword() {
   var passLengthInput = window.prompt("How many characters do you want your password? (Must be between 8-128): ");
-// Check for correct password length
+  // Check for correct password length
   if (passLengthInput < 8 || passLengthInput > 128) {
     return "\nPassword length invalid.\n\nPlease make sure length is between 8 and 128";
   }
-
+  // Prompts for password criteria
   var undercaseInput = window.confirm("Would you like your password to include undercase letters?");
   var uppercaseInput = window.confirm("Would you like your password to include uppercase letters?");
   var numbersInput = window.confirm("Would you like your password to include numbers?");
   var specialInput = window.confirm("Would you like your password to include special characters?");
   var passwordArray = [];
 
-// Checks if undercase was selected and adds to array if true
+  // Checks if undercase was selected and adds to array if true
   if (undercaseInput) {
     for (i=0; i<letters.length; i++) {
       passwordArray[i] = letters[i].toLowerCase();
     };
   }
-// Checks if uppercase was selected and adds to array if true. Also checks to see if array has already been added to yet.
+  // Checks if uppercase was selected and adds to array if true. Also checks to see if array has already been added to yet.
   if (uppercaseInput && passwordArray.length > 0) {
     passwordArray = passwordArray.concat(letters);
   } else if (uppercaseInput) {
     passwordArray = letters;
   }
-// Checks if numbers were selected and adds to the array if true. Also checks to see if array has already been added to yet.
+  // Checks if numbers were selected and adds to the array if true. Also checks to see if array has already been added to yet.
   if (numbersInput && passwordArray.length > 0) {
     passwordArray = passwordArray.concat(nums);
   } else if (numbersInput) {
     passwordArray = nums;
   }
-// Checks if special characters were selected and adds to the array if true. Also checks to see if array has already been added to yet.
+  // Checks if special characters were selected and adds to the array if true. Also checks to see if array has already been added to yet.
   if (specialInput && passwordArray.length > 0) {
     passwordArray = passwordArray.concat(specialChars);
   } else if (specialInput) {
     passwordArray = specialChars;
   }
-// Check for at least one entry data entry into the password field
+  // Check for at least one entry data entry into the password field
   if (passwordArray === []) {
     return "\nNo valid criteria selected.\n\nPlease select at least one criteria to generate password.";
   }
+  // Initializes starting password variable and iterates random character from the passwordArray to the new array
   var userPassword = [];
   for (i=0; i<passLengthInput; i++) {
     userPassword[i] = passwordArray[Math.floor(Math.random() * passwordArray.length)];
   }
-
+  // Returns the generated password array as a string with the commas removed (replaced by '')
   return userPassword.toString().replace(/,/g,'');
 };
 
