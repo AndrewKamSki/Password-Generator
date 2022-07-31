@@ -1,6 +1,7 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+// Define arrays for letters, numbers and special characters
 var letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","R","S","T","U","V","W","X","Y","Z"];
 var nums = [0,1,2,3,4,5,6,7,8,9];
 var specialChars = ["!",'"',"#","$","%","&","'","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","]","\"","^","_","`","{","|","}","~"];
@@ -44,7 +45,7 @@ function generatePassword() {
   }
 // Check for at least one entry data entry into the password field
   if (passwordArray === []) {
-    return;
+    return "\nNo valid criteria selected.\n\nPlease select at least one criteria to generate password.";
   }
   var userPassword = [];
   for (i=0; i<passLengthInput; i++) {
