@@ -7,6 +7,11 @@ var specialChars = ["!",'"',"#","$","%","&","'","(",")","*","+",",","-",".","/",
 
 function generatePassword() {
   var passLengthInput = window.prompt("How many characters do you want your password? (Must be between 8-128): ");
+// Check for correct password length
+  if (passLengthInput < 8 || passLengthInput > 128) {
+    return "\nPassword length invalid.\n\nPlease make sure length is between 8 and 128";
+  }
+
   var undercaseInput = window.confirm("Would you like your password to include undercase letters?");
   var uppercaseInput = window.confirm("Would you like your password to include uppercase letters?");
   var numbersInput = window.confirm("Would you like your password to include numbers?");
@@ -32,13 +37,22 @@ function generatePassword() {
     passwordArray = nums;
   }
 // Checks if special characters were selected and adds to the array if true. Also checks to see if array has already been added to yet.
-if (specialInput && passwordArray.length > 0) {
-  passwordArray = passwordArray.concat(specialChars);
-} else if (specialInput) {
-  passwordArray = specialChars;
-}
-  return passwordArray;
-}
+  if (specialInput && passwordArray.length > 0) {
+    passwordArray = passwordArray.concat(specialChars);
+  } else if (specialInput) {
+    passwordArray = specialChars;
+  }
+// Check for at least one entry data entry into the password field
+  if (passwordArray === []) {
+    return;
+  }
+  var userPassword = [];
+  for (i=0; i<passLengthInput; i++) {
+    userPassword[i] = passwordArray[Math.floor(Math.random() * passwordArray.length)];
+  }
+
+  return userPassword.toString().replace(/,/g,'');
+};
 
 // Write password to the #password input
 function writePassword() {
